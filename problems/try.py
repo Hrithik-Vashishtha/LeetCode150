@@ -1,14 +1,15 @@
-def canJump(nums):
-    goal = len(nums) - 1
-    i = len(nums) - 1
-    while i >= 0:
-        if nums[i] >= goal - i:
-            goal = i
-        elif goal <= 0:
-            return True
-        i -= 1
-    if goal == 0:
-        return True
-    return False
-nums = [2,3,1,1,4]
-print(canJump(nums))
+def maxProfit(prices):
+    i = 0
+    profit = 0
+    min_price = 0
+    max_profit = 0
+    while i < len(prices):
+        if prices[i] > min_price:
+            max_profit += max(profit, prices[i] - min_price)
+            min_price = prices[i]
+            profit = 0
+        i += 1
+    return max_profit
+
+prices = [1,2,3,4,5]
+print(maxProfit(prices))
