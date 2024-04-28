@@ -1,17 +1,18 @@
-def containsNearbyDuplicate(nums, k):
-    numDict = {}
+def longestConsecutive(nums):
+    num_index = {}
     for num in nums:
-        numDict[num] = numDict.get(num, 0) + 1
-    for key, value in numDict.items():
-        if value >= 2:
-            i, j = 0, len(nums) - 1
-            while i < j:
-                if nums[i] == nums[j] and abs(j - i) <= k:
-                    return True
-                else:
-                    j -= 1
-    return False
+        num_index[num] = num_index.get(num, 0) + 1
+    min_ = min(nums)
+    max_ = max(nums)
+    count = 0
+    new_count = 0
+    for i in range(min_, max_ + 1):
+        if i not in num_index:
+            count = max(new_count, count)
+            new_count = 0
+        else:
+            new_count += 1
+    return max(new_count, count)
 
-nums = [1,0,1,1]
-k = 1
-print(containsNearbyDuplicate(nums, k))
+nums = [9,1,4,7,3,-1,0,5,8,-1,6]
+print(longestConsecutive(nums))

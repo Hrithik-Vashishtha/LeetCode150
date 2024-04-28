@@ -1,15 +1,17 @@
-def containsNearbyDuplicate(nums, k):
-    window = set()
-    l = 0
-    for r in range(len(nums)):
-        if r - l > k:
-            window.remove(nums[l])
-            l += 1
-        if nums[r] in window:
-            return True
-        window.add(nums[r])
-    return False
+def isAnagram(s, t):
+    s_dic = {}
+    t_dic = {}
 
-nums = [1,0,1,1]
-k = 2
-print(containsNearbyDuplicate(nums, k))
+    for i in s:
+        s_dic[i] = s_dic.get(i, 0) + 1
+    for i in t:
+        t_dic[i] = t_dic.get(i, 0) + 1
+
+    for i in s:
+        if i in t_dic and s_dic[i] != t_dic[i]:
+            return False
+    return True
+
+s = "rat"
+t = "car"
+print(isAnagram(s, t))
