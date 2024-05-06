@@ -1,18 +1,21 @@
-def longestConsecutive(nums):
-    num_index = {}
-    for num in nums:
-        num_index[num] = num_index.get(num, 0) + 1
-    min_ = min(nums)
-    max_ = max(nums)
+def sumOfSquareDigits(n):
     count = 0
-    new_count = 0
-    for i in range(min_, max_ + 1):
-        if i not in num_index:
-            count = max(new_count, count)
-            new_count = 0
-        else:
-            new_count += 1
-    return max(new_count, count)
+    while n:
+        rem = n % 10
+        count += rem ** 2
+        n //= 10
+    return count
 
-nums = [9,1,4,7,3,-1,0,5,8,-1,6]
-print(longestConsecutive(nums))
+
+def isHappy(n):
+    visited = set()
+    while n:
+        if n == 1:
+            return True
+        if n in visited or n ** 2 < 10:
+            return False
+        visited.add(n)
+        n = sumOfSquareDigits(n)
+
+n = 19
+print(isHappy(n))
